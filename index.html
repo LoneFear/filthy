@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ПРОСЫПАЙСЯ ФИЛТИ</title>
+    <title>Админ-панель | ПРОСЫПАЙСЯ ФИЛТИ</title>
     <style>
         :root {
             --main-bg: #0a0a12;
@@ -83,7 +83,7 @@
             color: var(--secondary);
         }
 
-        .game-description {
+        .admin-section {
             background-color: rgba(10, 10, 18, 0.7);
             padding: 20px;
             border: 1px solid var(--dark-accent);
@@ -93,7 +93,7 @@
             overflow: hidden;
         }
 
-        .game-description::before {
+        .admin-section::before {
             content: "";
             position: absolute;
             top: 0;
@@ -103,204 +103,45 @@
             background: linear-gradient(90deg, var(--accent), var(--secondary), var(--dark-accent));
         }
 
-        .round {
-            background-color: rgba(20, 20, 30, 0.8);
-            border-left: 3px solid var(--accent);
-            padding: 15px;
+        .form-group {
             margin-bottom: 20px;
-            transition: all 0.3s ease;
-            cursor: pointer;
-            position: relative;
-            overflow: hidden;
         }
 
-        .round:hover {
-            transform: translateX(5px);
-            background-color: rgba(30, 30, 45, 0.9);
-        }
-
-        .round::after {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 0, 170, 0.1), transparent);
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
-
-        .round:hover::after {
-            opacity: 1;
-        }
-
-        .round-number {
-            display: inline-block;
-            background-color: var(--dark-accent);
-            color: white;
-            width: 30px;
-            height: 30px;
-            text-align: center;
-            line-height: 30px;
-            border-radius: 50%;
-            margin-right: 10px;
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: var(--secondary);
             font-weight: bold;
         }
 
-        .artist-card {
-            background-color: rgba(30, 30, 45, 0.9);
+        input[type="text"],
+        input[type="url"],
+        textarea,
+        select {
+            width: 100%;
+            padding: 10px;
+            background-color: rgba(20, 20, 30, 0.8);
             border: 1px solid var(--dark-accent);
-            padding: 15px;
-            margin: 15px 0;
-            display: flex;
-            align-items: center;
+            color: var(--text);
+            font-family: 'Courier New', monospace;
+            border-radius: 4px;
             transition: all 0.3s ease;
         }
 
-        .artist-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 5px 15px rgba(255, 0, 170, 0.3);
+        input[type="text"]:focus,
+        input[type="url"]:focus,
+        textarea:focus,
+        select:focus {
+            outline: none;
+            border-color: var(--accent);
+            box-shadow: 0 0 0 2px rgba(255, 0, 170, 0.3);
         }
 
-        .artist-image {
-            width: 80px;
-            height: 80px;
-            border-radius: 50%;
-            object-fit: cover;
-            margin-right: 20px;
-            border: 2px solid var(--accent);
+        textarea {
+            min-height: 100px;
+            resize: vertical;
         }
 
-        .artist-info h4 {
-            margin: 0;
-            color: var(--secondary);
-        }
-
-        .artist-info p {
-            margin: 5px 0 0;
-            font-size: 0.9rem;
-            opacity: 0.8;
-        }
-
-        .accordion {
-            margin: 30px 0;
-        }
-
-        .accordion-item {
-            margin-bottom: 10px;
-            border: 1px solid var(--dark-accent);
-        }
-
-        .accordion-header {
-            background-color: rgba(30, 30, 45, 0.9);
-            padding: 15px;
-            cursor: pointer;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            transition: background-color 0.3s ease;
-        }
-
-        .accordion-header:hover {
-            background-color: rgba(40, 40, 60, 0.9);
-        }
-
-        .accordion-content {
-            padding: 0 15px;
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.3s ease, padding 0.3s ease;
-            background-color: rgba(20, 20, 35, 0.9);
-        }
-
-        .accordion-content.active {
-            padding: 15px;
-            max-height: 500px;
-        }
-
-        .accordion-icon {
-            transition: transform 0.3s ease;
-        }
-
-        .accordion-icon.active {
-            transform: rotate(45deg);
-        }
-
-        footer {
-            text-align: center;
-            padding: 30px 0;
-            margin-top: 50px;
-            border-top: 1px solid var(--accent);
-            font-size: 0.9rem;
-            opacity: 0.7;
-        }
-
-        @keyframes pulse {
-            0% {
-                text-shadow: 0 0 5px var(--accent);
-            }
-
-            100% {
-                text-shadow: 0 0 20px var(--secondary), 0 0 10px var(--accent);
-            }
-        }
-
-        /* Глитч-эффекты */
-        .glitch {
-            position: relative;
-        }
-
-        .glitch::before,
-        .glitch::after {
-            content: attr(data-text);
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            opacity: 0.8;
-        }
-
-        .glitch::before {
-            color: #0ff;
-            z-index: -1;
-            animation: glitch-effect 3s infinite;
-        }
-
-        .glitch::after {
-            color: #f0f;
-            z-index: -2;
-            animation: glitch-effect 2s infinite reverse;
-        }
-
-        @keyframes glitch-effect {
-            0% {
-                transform: translate(0);
-            }
-
-            20% {
-                transform: translate(-3px, 3px);
-            }
-
-            40% {
-                transform: translate(-3px, -3px);
-            }
-
-            60% {
-                transform: translate(3px, 3px);
-            }
-
-            80% {
-                transform: translate(3px, -3px);
-            }
-
-            100% {
-                transform: translate(0);
-            }
-        }
-
-        /* Анимация для кнопок */
         .btn {
             display: inline-block;
             padding: 10px 20px;
@@ -315,6 +156,7 @@
             transition: all 0.3s ease;
             position: relative;
             overflow: hidden;
+            margin-right: 10px;
         }
 
         .btn:hover {
@@ -338,18 +180,127 @@
             left: 100%;
         }
 
+        .btn-secondary {
+            background: linear-gradient(45deg, var(--dark-accent), #4b0082);
+        }
+
+        .btn-danger {
+            background: linear-gradient(45deg, #ff0000, #8b0000);
+        }
+
+        .preview-area {
+            background-color: rgba(20, 20, 30, 0.8);
+            padding: 20px;
+            border: 1px dashed var(--secondary);
+            margin-top: 20px;
+            border-radius: 5px;
+        }
+
+        .artist-preview {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .artist-preview img {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-right: 20px;
+            border: 2px solid var(--accent);
+        }
+
+        .round-preview {
+            background-color: rgba(20, 20, 30, 0.8);
+            border-left: 3px solid var(--accent);
+            padding: 15px;
+            margin-bottom: 20px;
+        }
+
+        .round-preview h3 {
+            margin: 0 0 10px 0;
+        }
+
+        .admin-nav {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 30px;
+            border-bottom: 1px solid var(--dark-accent);
+            padding-bottom: 20px;
+        }
+
+        .admin-nav a {
+            color: var(--text);
+            text-decoration: none;
+            padding: 10px 20px;
+            margin: 0 10px;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .admin-nav a:hover {
+            background-color: rgba(255, 0, 170, 0.2);
+        }
+
+        .admin-nav a.active {
+            background-color: rgba(255, 0, 170, 0.4);
+        }
+
+        .admin-nav a.active::after {
+            content: "";
+            position: absolute;
+            bottom: -21px;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--accent), var(--secondary));
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        @keyframes pulse {
+            0% {
+                text-shadow: 0 0 5px var(--accent);
+            }
+
+            100% {
+                text-shadow: 0 0 20px var(--secondary), 0 0 10px var(--accent);
+            }
+        }
+
         /* Мобильная адаптация */
         @media (max-width: 768px) {
             h1 {
                 font-size: 2.5rem;
             }
 
-            .artist-card {
+            .admin-nav {
+                flex-direction: column;
+            }
+
+            .admin-nav a {
+                margin: 5px 0;
+                text-align: center;
+            }
+
+            .admin-nav a.active::after {
+                bottom: -6px;
+            }
+
+            .artist-preview {
                 flex-direction: column;
                 text-align: center;
             }
 
-            .artist-image {
+            .artist-preview img {
                 margin-right: 0;
                 margin-bottom: 15px;
             }
@@ -360,208 +311,363 @@
 <body>
     <div class="container">
         <header>
-            <h1 class="glitch" data-text="ПРОСЫПАЙСЯ ФИЛТИ">ПРОСЫПАЙСЯ ФИЛТИ</h1>
-            <p>Музыка — это паразит. Ты слышишь её — значит, уже заражён.</p>
+            <h1>АДМИН-ПАНЕЛЬ</h1>
+            <p>Управление звуковой вселенной "ПРОСЫПАЙСЯ ФИЛТИ"</p>
         </header>
 
-        <section class="game-description">
-            <h2>ОБ ИГРЕ</h2>
-            <p><strong>ПРОСЫПАЙСЯ ФИЛТИ</strong> — это психоделический экшен-хоррор, где звук становится оружием,
-                ловушкой и болезнью. Главный герой — Последний Композитор, пробирающийся через руины города, где жители
-                превратились в живые инструменты, а законы реальности искажены ритмом Великой Мелодии — древнего
-                паттерна, стирающего границы между сознанием и безумием.</p>
-            <button class="btn" id="trailerBtn">СМОТРЕТЬ ТРЕЙЛЕР</button>
-        </section>
+        <div class="admin-nav">
+            <a href="#" class="active" onclick="openTab(event, 'characters')">Персонажи</a>
+            <a href="#" onclick="openTab(event, 'levels')">Уровни</a>
+            <a href="#" onclick="openTab(event, 'settings')">Настройки</a>
+        </div>
 
-        <section>
-            <h2>СЕТЛИСТ (РАУНДЫ)</h2>
-            <p>Каждый уровень — это трек с уникальным саундскейпом:</p>
+        <div id="characters" class="tab-content active">
+            <section class="admin-section">
+                <h2>ДОБАВИТЬ НОВОГО ПЕРСОНАЖА</h2>
+                <form id="addCharacterForm">
+                    <div class="form-group">
+                        <label for="characterName">Имя персонажа</label>
+                        <input type="text" id="characterName" required>
+                    </div>
 
-            <div class="round" onclick="toggleRound(this)">
-                <h3><span class="round-number">1</span> Гимн пустых голосов</h3>
-                <div class="round-content">
-                    <p>Найти первый фрагмент партитуры, скрытый в руинах Собора Голосов.</p>
-                    <p><strong>Саундтрек:</strong> Хоровые записи, искажённые голоса, церковные органные глитчи.</p>
-                </div>
-            </div>
+                    <div class="form-group">
+                        <label for="characterImage">URL изображения</label>
+                        <input type="url" id="characterImage" required>
+                    </div>
 
-            <div class="round" onclick="toggleRound(this)">
-                <h3><span class="round-number">2</span> Баслайн Катакомбы</h3>
-                <div class="round-content">
-                    <p>Добыть винтажный усилитель, способный заглушить ритмы подземелья.</p>
-                    <p><strong>Саундтрек:</strong> Глубокие басовые частоты, механические скрежеты, подземные резонансы.
-                    </p>
-                </div>
-            </div>
+                    <div class="form-group">
+                        <label for="characterDescription">Описание</label>
+                        <textarea id="characterDescription" required></textarea>
+                    </div>
 
-            <div class="round" onclick="toggleRound(this)">
-                <h3><span class="round-number">3</span> Виниловый Реквием</h3>
-                <div class="round-content">
-                    <p>Найти мастер-ленту с записью истинной мелодии.</p>
-                    <p><strong>Саундтрек:</strong> Виниловые потрескивания, перемотка кассет, аналоговые искажения.</p>
-                </div>
-            </div>
+                    <div class="form-group">
+                        <label for="characterRole">Роль в игре</label>
+                        <input type="text" id="characterRole" required>
+                    </div>
 
-            <div class="round" onclick="toggleRound(this)">
-                <h3><span class="round-number">4</span> Статический Повелитель</h3>
-                <div class="round-content">
-                    <p>Достичь Главной Башни Вещания, где скрыт источник сигнала.</p>
-                    <p><strong>Саундтрек:</strong> Радиопомехи, коротковолновые передачи, цифровой шум.</p>
-                </div>
-            </div>
+                    <button type="submit" class="btn">Добавить персонажа</button>
+                    <button type="button" class="btn btn-secondary" onclick="previewCharacter()">Предпросмотр</button>
+                </form>
 
-            <div class="round" onclick="toggleRound(this)">
-                <h3><span class="round-number">5</span> Окончательный отзыв</h3>
-                <div class="round-content">
-                    <p>Добраться до Сердца Сигнала — гигантского звукового кокона.</p>
-                    <p><strong>Саундтрек:</strong> Космические синтезаторы, белый шум, резонансные частоты.</p>
+                <div class="preview-area" id="characterPreview" style="display: none;">
+                    <h3>Предпросмотр персонажа</h3>
+                    <div class="artist-preview">
+                        <img id="previewCharacterImage" src="" alt="Preview">
+                        <div>
+                            <h4 id="previewCharacterName"></h4>
+                            <p id="previewCharacterRole"></p>
+                            <p id="previewCharacterDescription"></p>
+                        </div>
+                    </div>
                 </div>
-            </div>
+            </section>
 
-            <div class="round" onclick="toggleRound(this)">
-                <h3><span class="round-number">6</span> ФИНАЛ</h3>
-                <div class="round-content">
-                    <p><strong>1) Разбить говорящего:</strong> Уничтожить источник Великой Мелодии.</p>
-                    <p><strong>2) Вызов на бис навсегда:</strong> Занять место Дирижёра.</p>
-                    <p><strong>Саундтрек:</strong> Полная тишина, прерываемая единичными импульсами.</p>
+            <section class="admin-section">
+                <h2>СПИСОК ПЕРСОНАЖЕЙ</h2>
+                <div id="charactersList">
+                    <!-- Персонажи будут загружаться здесь -->
+                    <p>Загрузка персонажей...</p>
                 </div>
-            </div>
-        </section>
+            </section>
+        </div>
 
-        <section>
-            <h2>ОПИУМ АРТИСТЫ</h2>
-            <p>Музыканты, вдохновившие звуковую вселенную игры:</p>
+        <div id="levels" class="tab-content">
+            <section class="admin-section">
+                <h2>СОЗДАТЬ НОВЫЙ УРОВЕНЬ</h2>
+                <form id="addLevelForm">
+                    <div class="form-group">
+                        <label for="levelNumber">Номер уровня</label>
+                        <select id="levelNumber" required>
+                            <option value="">Выберите номер</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6 (ФИНАЛ)</option>
+                        </select>
+                    </div>
 
-            <div class="artist-card">
-                <img src="https://i.scdn.co/image/ab6761610000e5eb5d1dffd1a80f0026a0a9fddf" alt="Playboi Carti"
-                    class="artist-image">
-                <div class="artist-info">
-                    <h4>Playboi Carti</h4>
-                    <p>Голос Статического Повелителя. Его адлибы стали мантрами для потерянных в сигнале.</p>
-                </div>
-            </div>
+                    <div class="form-group">
+                        <label for="levelName">Название уровня</label>
+                        <input type="text" id="levelName" required>
+                    </div>
 
-            <div class="artist-card">
-                <img src="https://i.scdn.co/image/ab6761610000e5ebc36dd9eb55fb0db4911bc25d" alt="Destroy Lonely"
-                    class="artist-image">
-                <div class="artist-info">
-                    <h4>Destroy Lonely</h4>
-                    <p>Композитор Баслайн Катакомб. Его меланхоличные мелодии ведут через подземелья.</p>
-                </div>
-            </div>
+                    <div class="form-group">
+                        <label for="levelObjective">Задача уровня</label>
+                        <textarea id="levelObjective" required></textarea>
+                    </div>
 
-            <div class="artist-card">
-                <img src="https://i.scdn.co/image/ab6761610000e5eb0bae7cfd3b32b10154e0b8b3" alt="Ken Carson"
-                    class="artist-image">
-                <div class="artist-info">
-                    <h4>Ken Carson</h4>
-                    <p>Создатель Винилового Реквиема. Его агрессивные биты стали оружием против искажений.</p>
-                </div>
-            </div>
-        </section>
+                    <div class="form-group">
+                        <label for="levelSoundtrack">Описание саундтрека</label>
+                        <textarea id="levelSoundtrack" required></textarea>
+                    </div>
 
-        <section class="accordion">
-            <h2>ВОПРОСЫ-ОТВЕТЫ</h2>
+                    <div class="form-group">
+                        <label for="levelBoss">Босс уровня (опционально)</label>
+                        <input type="text" id="levelBoss">
+                    </div>
 
-            <div class="accordion-item">
-                <div class="accordion-header" onclick="toggleAccordion(this)">
-                    <h3>Как музыка влияет на игровой процесс?</h3>
-                    <span class="accordion-icon">+</span>
-                </div>
-                <div class="accordion-content">
-                    <p>Каждый звук в игре — это одновременно и инструмент, и угроза. Враги реагируют на ритм, а
-                        некоторые головоломки требуют точного воспроизведения мелодий. Ваш собственный пульс становится
-                        частью саундтрека.</p>
-                </div>
-            </div>
+                    <button type="submit" class="btn">Создать уровень</button>
+                    <button type="button" class="btn btn-secondary" onclick="previewLevel()">Предпросмотр</button>
+                </form>
 
-            <div class="accordion-item">
-                <div class="accordion-header" onclick="toggleAccordion(this)">
-                    <h3>Есть ли в игре мультиплеер?</h3>
-                    <span class="accordion-icon">+</span>
+                <div class="preview-area" id="levelPreview" style="display: none;">
+                    <h3>Предпросмотр уровня</h3>
+                    <div class="round-preview">
+                        <h3><span class="round-number" id="previewLevelNumber"></span> <span
+                                id="previewLevelName"></span></h3>
+                        <div>
+                            <p id="previewLevelObjective"></p>
+                            <p><strong>Саундтрек:</strong> <span id="previewLevelSoundtrack"></span></p>
+                            <p id="previewLevelBoss" style="display: none;"><strong>Босс:</strong> <span
+                                    id="previewBossName"></span></p>
+                        </div>
+                    </div>
                 </div>
-                <div class="accordion-content">
-                    <p>Нет, это строго одиночное путешествие. Однако ваши игровые сессии могут оставлять "акустические
-                        следы" — фрагменты музыки, которые могут услышать другие игроки в определённых местах.</p>
-                </div>
-            </div>
+            </section>
 
-            <div class="accordion-item">
-                <div class="accordion-header" onclick="toggleAccordion(this)">
-                    <h3>Какие платформы поддерживаются?</h3>
-                    <span class="accordion-icon">+</span>
+            <section class="admin-section">
+                <h2>СПИСОК УРОВНЕЙ</h2>
+                <div id="levelsList">
+                    <!-- Уровни будут загружаться здесь -->
+                    <p>Загрузка уровней...</p>
                 </div>
-                <div class="accordion-content">
-                    <p>Игра выйдет на PC, PlayStation 5 и Xbox Series X|S. Для полного погружения рекомендуется
-                        использовать наушники с хорошим звуковым диапазоном.</p>
-                </div>
-            </div>
+            </section>
+        </div>
 
-            <div class="accordion-item">
-                <div class="accordion-header" onclick="toggleAccordion(this)">
-                    <h3>Будет ли продолжение?</h3>
-                    <span class="accordion-icon">+</span>
+        <div id="settings" class="tab-content">
+            <section class="admin-section">
+                <h2>НАСТРОЙКИ САЙТА</h2>
+                <form id="siteSettingsForm">
+                    <div class="form-group">
+                        <label for="siteTitle">Заголовок сайта</label>
+                        <input type="text" id="siteTitle" value="ПРОСЫПАЙСЯ ФИЛТИ">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="siteSlogan">Слоган</label>
+                        <input type="text" id="siteSlogan" value="Музыка — это паразит. Ты слышишь её — значит, уже заражён.">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="mainColor">Основной цвет</label>
+                        <input type="color" id="mainColor" value="#ff00aa">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="secondaryColor">Вторичный цвет</label>
+                        <input type="color" id="secondaryColor" value="#00ffcc">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="adminPassword">Пароль админа</label>
+                        <input type="password" id="adminPassword" placeholder="Введите новый пароль">
+                    </div>
+
+                    <button type="submit" class="btn">Сохранить настройки</button>
+                    <button type="button" class="btn btn-danger" onclick="resetSettings()">Сбросить к стандартным</button>
+                </form>
+            </section>
+
+            <section class="admin-section">
+                <h2>СИСТЕМНАЯ ИНФОРМАЦИЯ</h2>
+                <div class="form-group">
+                    <label>Статус сервера</label>
+                    <p>🟢 Онлайн (все системы работают нормально)</p>
                 </div>
-                <div class="accordion-content">
-                    <p>Финал игры оставляет пространство для интерпретации. Если достаточно игроков выберут вариант
-                        "Вызов на бис навсегда", мы рассмотрим возможность расширения вселенной.</p>
+
+                <div class="form-group">
+                    <label>Последнее обновление</label>
+                    <p id="lastUpdate">Сегодня, 15:42</p>
                 </div>
-            </div>
-        </section>
+
+                <div class="form-group">
+                    <label>Количество персонажей</label>
+                    <p id="charactersCount">3</p>
+                </div>
+
+                <div class="form-group">
+                    <label>Количество уровней</label>
+                    <p id="levelsCount">6</p>
+                </div>
+
+                <button class="btn" onclick="backupData()">Создать резервную копию</button>
+                <button class="btn btn-secondary" onclick="checkUpdates()">Проверить обновления</button>
+            </section>
+        </div>
 
         <footer>
-            <p>© 2023 ПРОСЫПАЙСЯ ФИЛТИ. Все права защищены. Музыка — это болезнь.</p>
-            <p>Саундтрек доступен на всех стриминговых платформах.</p>
+            <p>© 2023 Админ-панель "ПРОСЫПАЙСЯ ФИЛТИ". Только для авторизованного персонала.</p>
+            <p id="loginTime">Вы вошли в систему: сегодня, 15:30</p>
         </footer>
     </div>
 
     <script>
-        // Анимация для раундов
-        function toggleRound(element) {
-            const content = element.querySelector('.round-content');
-            content.style.display = content.style.display === 'none' ? 'block' : 'none';
-        }
-
-        // Аккордеон для вопросов-ответов
-        function toggleAccordion(header) {
-            const item = header.parentElement;
-            const content = item.querySelector('.accordion-content');
-            const icon = item.querySelector('.accordion-icon');
-
-            content.classList.toggle('active');
-            icon.classList.toggle('active');
-
-            // Закрываем другие открытые элементы
-            document.querySelectorAll('.accordion-item').forEach(otherItem => {
-                if (otherItem !== item) {
-                    otherItem.querySelector('.accordion-content').classList.remove('active');
-                    otherItem.querySelector('.accordion-icon').classList.remove('active');
-                }
-            });
-        }
-
-        // Обработчик для кнопки трейлера
-        document.getElementById('trailerBtn').addEventListener('click', function () {
-            alert('Трейлер пока недоступен. Скоро вы услышите...');
-        });
-
-        // Глитч-эффект при загрузке
-        window.addEventListener('load', function () {
-            const glitch = document.querySelector('.glitch');
-            glitch.style.animation = 'glitch-effect 0.5s linear 2';
-
-            setTimeout(() => {
-                glitch.style.animation = '';
-            }, 1000);
-        });
-
-        // Случайные звуковые эффекты
-        document.addEventListener('click', function () {
-            if (Math.random() > 0.9) {
-                const sounds = ['click', 'pop', 'glitch'];
-                const sound = sounds[Math.floor(Math.random() * sounds.length)];
-                console.log('Sound effect:', sound); // В реальном сайте здесь было бы воспроизведение звука
+        // Переключение между вкладками
+        function openTab(evt, tabName) {
+            const tabContents = document.getElementsByClassName("tab-content");
+            for (let i = 0; i < tabContents.length; i++) {
+                tabContents[i].classList.remove("active");
             }
+
+            const tabLinks = document.querySelectorAll(".admin-nav a");
+            for (let i = 0; i < tabLinks.length; i++) {
+                tabLinks[i].classList.remove("active");
+            }
+
+            document.getElementById(tabName).classList.add("active");
+            evt.currentTarget.classList.add("active");
+        }
+
+        // Предпросмотр персонажа
+        function previewCharacter() {
+            const name = document.getElementById("characterName").value;
+            const imageUrl = document.getElementById("characterImage").value;
+            const description = document.getElementById("characterDescription").value;
+            const role = document.getElementById("characterRole").value;
+
+            if (name && imageUrl && description && role) {
+                document.getElementById("previewCharacterName").textContent = name;
+                document.getElementById("previewCharacterImage").src = imageUrl;
+                document.getElementById("previewCharacterImage").alt = name;
+                document.getElementById("previewCharacterRole").textContent = role;
+                document.getElementById("previewCharacterDescription").textContent = description;
+
+                const preview = document.getElementById("characterPreview");
+                preview.style.display = "block";
+            } else {
+                alert("Заполните все поля для предпросмотра");
+            }
+        }
+
+        // Предпросмотр уровня
+        function previewLevel() {
+            const number = document.getElementById("levelNumber").value;
+            const name = document.getElementById("levelName").value;
+            const objective = document.getElementById("levelObjective").value;
+            const soundtrack = document.getElementById("levelSoundtrack").value;
+            const boss = document.getElementById("levelBoss").value;
+
+            if (number && name && objective && soundtrack) {
+                document.getElementById("previewLevelNumber").textContent = number;
+                document.getElementById("previewLevelName").textContent = name;
+                document.getElementById("previewLevelObjective").textContent = objective;
+                document.getElementById("previewLevelSoundtrack").textContent = soundtrack;
+
+                if (boss) {
+                    document.getElementById("previewBossName").textContent = boss;
+                    document.getElementById("previewLevelBoss").style.display = "block";
+                } else {
+                    document.getElementById("previewLevelBoss").style.display = "none";
+                }
+
+                const preview = document.getElementById("levelPreview");
+                preview.style.display = "block";
+            } else {
+                alert("Заполните все обязательные поля для предпросмотра");
+            }
+        }
+
+        // Обработка формы персонажа
+        document.getElementById("addCharacterForm").addEventListener("submit", function (e) {
+            e.preventDefault();
+            
+            // Здесь будет код для сохранения персонажа
+            alert("Персонаж успешно добавлен!");
+            this.reset();
+            document.getElementById("characterPreview").style.display = "none";
+            
+            // Обновляем список персонажей
+            updateCharactersList();
+        });
+
+        // Обработка формы уровня
+        document.getElementById("addLevelForm").addEventListener("submit", function (e) {
+            e.preventDefault();
+            
+            // Здесь будет код для сохранения уровня
+            alert("Уровень успешно создан!");
+            this.reset();
+            document.getElementById("levelPreview").style.display = "none";
+            
+            // Обновляем список уровней
+            updateLevelsList();
+        });
+
+        // Обработка формы настроек
+        document.getElementById("siteSettingsForm").addEventListener("submit", function (e) {
+            e.preventDefault();
+            alert("Настройки успешно сохранены!");
+        });
+
+        // Сброс настроек
+        function resetSettings() {
+            if (confirm("Вы уверены, что хотите сбросить все настройки к стандартным?")) {
+                document.getElementById("siteTitle").value = "ПРОСЫПАЙСЯ ФИЛТИ";
+                document.getElementById("siteSlogan").value = "Музыка — это паразит. Ты слышишь её — значит, уже заражён.";
+                document.getElementById("mainColor").value = "#ff00aa";
+                document.getElementById("secondaryColor").value = "#00ffcc";
+                alert("Настройки сброшены к стандартным");
+            }
+        }
+
+        // Создание резервной копии
+        function backupData() {
+            alert("Резервная копия успешно создана и сохранена на сервере");
+            document.getElementById("lastUpdate").textContent = "Только что";
+        }
+
+        // Проверка обновлений
+        function checkUpdates() {
+            alert("Проверка обновлений... Ваша версия админ-панели актуальна");
+        }
+
+        // Обновление списка персонажей (заглушка)
+        function updateCharactersList() {
+            // В реальном приложении здесь был бы AJAX-запрос к серверу
+            document.getElementById("charactersList").innerHTML = `
+                <div class="artist-card">
+                    <img src="https://i.scdn.co/image/ab6761610000e5eb5d1dffd1a80f0026a0a9fddf" alt="Playboi Carti" class="artist-image">
+                    <div class="artist-info">
+                        <h4>Playboi Carti</h4>
+                        <p>Голос Статического Повелителя. Его адлибы стали мантрами для потерянных в сигнале.</p>
+                    </div>
+                    <button class="btn btn-secondary" style="margin-left: auto;">Редактировать</button>
+                    <button class="btn btn-danger">Удалить</button>
+                </div>
+                <p>И другие персонажи... (в реальном приложении здесь был бы полный список)</p>
+            `;
+            document.getElementById("charactersCount").textContent = "3";
+        }
+
+        // Обновление списка уровней (заглушка)
+        function updateLevelsList() {
+            // В реальном приложении здесь был бы AJAX-запрос к серверу
+            document.getElementById("levelsList").innerHTML = `
+                <div class="round">
+                    <h3><span class="round-number">1</span> Гимн пустых голосов</h3>
+                    <div class="round-content">
+                        <p>Найти первый фрагмент партитуры, скрытый в руинах Собора Голосов.</p>
+                        <p><strong>Саундтрек:</strong> Хоровые записи, искажённые голоса, церковные органные глитчи.</p>
+                    </div>
+                    <button class="btn btn-secondary">Редактировать</button>
+                    <button class="btn btn-danger">Удалить</button>
+                </div>
+                <p>И другие уровни... (в реальном приложении здесь был бы полный список)</p>
+            `;
+            document.getElementById("levelsCount").textContent = "6";
+        }
+
+        // Инициализация при загрузке
+        window.addEventListener("load", function() {
+            updateCharactersList();
+            updateLevelsList();
+            
+            // Устанавливаем текущее время входа
+            const now = new Date();
+            const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit' };
+            document.getElementById("loginTime").textContent = "Вы вошли в систему: " + now.toLocaleDateString('ru-RU', options);
         });
     </script>
 </body>
